@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-prometheus
+spec:
+  selector:
+    matchLabels:
+      app: spring-boot-prometheus
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: spring-boot-prometheus
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      containers:
+        - name: spring-boot-prometheus
+          image: javacream/restserver:books
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-boot-prometheus
+  name: spring-boot-prometheus
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: spring-boot-prometheus
+  type: ClusterIP
+status:
+  loadBalancer: {}
