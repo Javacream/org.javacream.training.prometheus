@@ -1,6 +1,7 @@
 package org.javacream.store.web;
 
 import org.javacream.store.api.StoreService;
+import org.javacream.util.aspect.CountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,11 +20,13 @@ public class StoreWebService {
 	@Autowired
 	private StoreService storeService;
 
+	@CountRequest
 	@GetMapping(path = "store/{category}/{item}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String getStock(@PathVariable("category") String category, @PathVariable("item") String item) {
 		return Integer.toString(storeService.getStock(category, item));
 	}
 
+	@CountRequest
 	@PostMapping(path = "store/{category}/{item}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public void setStock(@PathVariable("category") String category, @PathVariable("item") String item,
 			@RequestHeader("stock") int stock) {

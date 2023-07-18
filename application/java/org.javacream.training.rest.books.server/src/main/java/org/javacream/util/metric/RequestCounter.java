@@ -5,8 +5,8 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
 @Component
-@ManagedResource(objectName = "org.javacream:name=simple,type=counter")
-public class SimpleCounter {
+@ManagedResource(objectName = "org.javacream:name=request,type=counter")
+public class RequestCounter {
 	private int counter = 0;
 
 	@ManagedAttribute(description =  "a simpleCounter")

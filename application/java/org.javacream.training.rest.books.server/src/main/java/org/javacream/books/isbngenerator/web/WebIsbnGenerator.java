@@ -1,8 +1,7 @@
 package org.javacream.books.isbngenerator.web;
 
 import org.javacream.books.isbngenerator.api.IsbnGenerator;
-import org.javacream.util.aspect.Trace;
-import org.javacream.util.metric.SimpleCounter;
+import org.javacream.util.aspect.CountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,11 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class WebIsbnGenerator {
 	@Autowired
 	IsbnGenerator isbnGenerator;
-	@Autowired SimpleCounter counter;
 	@PostMapping(path = "isbn", produces = MediaType.TEXT_PLAIN_VALUE)
-	@Trace
+	@CountRequest
 	public String nextIsbn() {
-		counter.increment();
 		return isbnGenerator.next();
 	}
 }

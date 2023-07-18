@@ -6,6 +6,7 @@ import java.util.List;
 import org.javacream.books.warehouse.api.Book;
 import org.javacream.books.warehouse.api.BookException;
 import org.javacream.books.warehouse.api.BooksService;
+import org.javacream.util.aspect.CountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +30,7 @@ public class BooksWebService {
 	private BooksService booksService;
 
 
+	@CountRequest
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Book> findBooks() {
 		try {
@@ -38,6 +40,7 @@ public class BooksWebService {
 		}
 	}
 
+	@CountRequest
 	@GetMapping(path = "{isbn}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Book findBookByIsbn(@PathVariable("isbn") String isbn) {
 		try {
@@ -47,6 +50,7 @@ public class BooksWebService {
 		}
 	}
 
+	@CountRequest
 	@PostMapping(path = "{title}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String newBook(@PathVariable("title") String title, @RequestParam(defaultValue = "9.99", value = "price") double price) {
 		try {
@@ -56,6 +60,7 @@ public class BooksWebService {
 		}
 	}
 
+	@CountRequest
 	@DeleteMapping(path = "{isbn}")
 	public void deleteBookByIsbn(@PathVariable("isbn") String isbn) {
 		try {
@@ -65,6 +70,7 @@ public class BooksWebService {
 		}
 	}
 
+	@CountRequest
 	@PutMapping(path = "{isbn}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Book updateBook(@PathVariable("isbn") String isbn, @RequestBody Book toUpdate) {
 		try {
