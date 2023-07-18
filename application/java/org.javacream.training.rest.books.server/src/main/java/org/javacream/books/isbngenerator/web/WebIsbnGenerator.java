@@ -1,6 +1,7 @@
 package org.javacream.books.isbngenerator.web;
 
 import org.javacream.books.isbngenerator.api.IsbnGenerator;
+import org.javacream.util.aspect.Trace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +17,7 @@ public class WebIsbnGenerator {
 	IsbnGenerator isbnGenerator;
 
 	@PostMapping(path = "isbn", produces = MediaType.TEXT_PLAIN_VALUE)
+	@Trace
 	public String nextIsbn() {
 		return isbnGenerator.next();
 	}
