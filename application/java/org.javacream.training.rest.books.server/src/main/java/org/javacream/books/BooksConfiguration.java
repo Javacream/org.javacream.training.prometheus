@@ -12,10 +12,15 @@ import org.javacream.books.warehouse.api.SpecialistBook;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Profile;
+
+import io.micrometer.core.aop.TimedAspect;
+import io.micrometer.core.instrument.MeterRegistry;
 
 @Configuration
 @Profile("dev")
+@EnableAspectJAutoProxy
 public class BooksConfiguration {
 
 	@Bean
@@ -45,6 +50,10 @@ public class BooksConfiguration {
 			return book;
 		});
 		return generators;
+	}
+	
+	@Bean public TimedAspect timed(MeterRegistry meterRegistry) {
+		return new TimedAspect(meterRegistry);
 	}
 
 
