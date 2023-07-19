@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.micrometer.core.annotation.Timed;
+
 @RestController
 @RequestMapping(path = "api/books")
 @CrossOrigin
+@Timed("books.operations")
 public class BooksWebService {
 	@Autowired
 	private BooksService booksService;

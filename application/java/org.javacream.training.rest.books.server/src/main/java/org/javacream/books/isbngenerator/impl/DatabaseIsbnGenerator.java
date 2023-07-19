@@ -9,6 +9,8 @@ import org.javacream.books.isbngenerator.api.IsbnGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import io.micrometer.core.annotation.Timed;
+
 @Component
 public class DatabaseIsbnGenerator implements IsbnGenerator{
 
@@ -26,6 +28,7 @@ public class DatabaseIsbnGenerator implements IsbnGenerator{
 
 	@Override
 	@Transactional
+	@Timed(value="isbn.business", description = "business function to generate an isbn")
 	public String next() {
 		Integer key = (Integer) entityManager.createNativeQuery("select col_key from keys").getSingleResult();
 		key++;
