@@ -4,7 +4,7 @@
 
 * Referent Rainer Sawitzki, rainer.sawitzki@gmail.com
 
-* [Digitales Flipchart](https://docs.google.com/presentation/d/1oP7CQBaUCid4dLlSJgvvfmZvxva18uvy-qSCOe5rWpw/edit?usp=sharing)
+* [Digitales Flipchart](https://docs.google.com/presentation/d/1wRy6PM2ch8MJ7c_-YlXMerTBO3XhQQ_nlyHZ4BOaKT8/edit?usp=sharing)
 
 * Seminarzeiten
   * 8 Unterrichtseinheiten mit jeweils 90 Minuten
