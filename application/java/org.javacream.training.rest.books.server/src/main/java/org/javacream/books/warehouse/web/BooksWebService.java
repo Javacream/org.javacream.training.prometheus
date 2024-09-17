@@ -3,6 +3,8 @@ package org.javacream.books.warehouse.web;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.javacream.books.warehouse.api.Book;
 import org.javacream.books.warehouse.api.BookException;
 import org.javacream.books.warehouse.api.BooksService;
@@ -22,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
+
 @RestController
 @RequestMapping(path = "api/books")
 @CrossOrigin
@@ -29,15 +34,22 @@ public class BooksWebService {
 	@Autowired
 	private BooksService booksService;
 
+	@Autowired MeterRegistry meterRegistry;
 
+	private Counter requests;
+	@PostConstruct public void init() {
+		requests = Counter.builder("books_webservice_requests").register(meterRegistry);
+	}
 	@CountRequest
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Book> findBooks() {
+		requests.increment();
 		try {
 			return booksService.booksList();
 		} catch (Exception be) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
+		
 	}
 
 	@CountRequest
