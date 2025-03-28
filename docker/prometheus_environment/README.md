@@ -8,3 +8,5 @@ It will be build when started with docker-compose. To rebuild: `docker-compose b
 
 Otherwise in the root directory just: `docker-compose up`
 
+# Workaround Deskmate
+/snap/bin/docker-compose up -d
