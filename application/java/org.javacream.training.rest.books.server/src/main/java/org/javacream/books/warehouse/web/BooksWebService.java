@@ -37,19 +37,24 @@ public class BooksWebService {
 	@Autowired MeterRegistry meterRegistry;
 
 	private Counter requests;
+	private Counter requests_duration_seconds;
 	@PostConstruct public void init() {
 		requests = Counter.builder("books_webservice_requests").register(meterRegistry);
+		requests_duration_seconds = Counter.builder("books_webservice_requests_duration_seconds").register(meterRegistry);
 	}
 	@CountRequest
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Book> findBooks() {
+		long start = System.currentTimeMillis();
 		requests.increment();
 		try {
 			return booksService.booksList();
 		} catch (Exception be) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
+		finally {
+			requests_duration_seconds.increment((System.currentTimeMillis() - start)/1000);
+		}	
 	}
 
 	@CountRequest
