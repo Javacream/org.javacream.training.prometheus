@@ -12,8 +12,8 @@
        * 9:00 - 16:45
     * Dienstag
        * **8:30 - 14:45**
-    * Mittagspause 45 Minuten (12:15-13:00)
-    * Kaffeepausen Vormittags/Nachmittags 15 Minuten (10:15 und montags 14:15)
+    * Mittagspause 45 Minuten (12:15-13:00) und Dienstag 11:45-12:30
+    * Kaffeepausen Vormittags/Nachmittags 15 Minuten (Montag 10:30 und 14:30, Dienstag 10:15)
     * Jeder Seminartag beginnt mit 15 Minuten "Warm Up": Einrichten der Umgebung, Programm des Tages, Anmerkungen/Wünsche
     * Jeder Seminartag endet mit 15 Minuten"Cool down": Fragen, offene Punkte, Übungen fertigstellen
   
